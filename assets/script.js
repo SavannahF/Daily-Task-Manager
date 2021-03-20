@@ -1,6 +1,9 @@
+/*JS work on hourly divs to save user input locally,
+change color of each to reflect past, present or future hour block*/
+
 tasks = [];
 
-//load tasks
+//Load tasks
 var loadTasks = function () {
   tasks = JSON.parse(localStorage.getItem("tasks"));
   if (!tasks) {
@@ -9,24 +12,23 @@ var loadTasks = function () {
   printTasks(tasks);
 };
 
+//Print tasks
 var printTasks = function () {
   $.each(tasks, function (list, arr) {
     var taskP = $("<p>")
       .addClass("description task-item-" + list)
       .text(arr);
 
-    // console.log(list)
-    // console.log(taskP);
-
     $("#task-item-" + list).replaceWith(taskP);
   });
 };
 
-var Today = moment().format("MMMM D, YYYY");
-$("#currentDay").text(Today);
+// moment for today's date, use to compare ppp
+var today = moment().format("MMMM D, YYYY");
+$("#currentDay").text(today);
 
-//color code hours bins
-var hourAudit = function () {
+//compare moment to past, present, or future
+var changeHour = function () {
   var currentHour = moment().hour();
 
   for (var i = 8; i < 19; i++) {
@@ -41,9 +43,16 @@ var hourAudit = function () {
   }
 };
 
-//Task update with click
+setInterval(function () {
+  changeHour();
+}, 1000 * 60 * 60);
+
+loadTasks();
+changeHour();
+
+//Update p on click
 $(".taskBin").on("click", "p", function () {
-  // console.log("<p> was clicked");
+  // console.log("<p> element clicked");
   var text = $(this).text().trim();
   var textInput = $("<textarea>").addClass("form-control").val(text);
 
@@ -53,7 +62,7 @@ $(".taskBin").on("click", "p", function () {
 
 //Task needs to be updated
 $(".taskBin").on("blur", "textarea", function () {
-  //get the textareas; current value/text
+  //get the text areas; current value/text
   var text = $(this).val().trim();
   // console.log(text)
 
@@ -64,18 +73,12 @@ $(".taskBin").on("blur", "textarea", function () {
   $(this).replaceWith(taskP);
 });
 
-//Save tasks
+// Save button click to...
 $(".saveBtn").on("click", function () {
-  //   console.log("<save button> was clicked");
+  // console.log("saveBtn clicked");
+
+  //Save tasks in local storage
   var index = $(".saveBtn").index(this);
-  //   console.log(index)
   tasks[index] = $(this).parent().find(".taskItem").text();
   localStorage.setItem("tasks", JSON.stringify(tasks));
 });
-
-setInterval(function () {
-  hourAudit();
-}, 1000 * 60 * 60);
-
-loadTasks();
-hourAudit();

@@ -12,8 +12,10 @@ Screen Shots can be found below:
 
 <!-- INSERT FINAL SCREENSHOTS HERE -->
 
-![Title](src)
-![Title](src)
+![Front Page (top half)](./assets/FRONT_PAGE.png)
+![If Present Hour is 2pm](./assets/PRESENT_HOUR_2PM.png)
+![P element clicked for input](./assets/INPUT_DATA.png)
+![Saved 4pm Task](./assets/SAVED_DATA.png)
 
 ## Installation
 
@@ -27,7 +29,7 @@ Visit the github-hosted webpage for the user experience.
 
 ## Instructions
 
-The user enters and saves text into each of the hourly fields. Data entered and Saved (by clicking on the Save button) is then saved to the browser's local storage.
+The user enters and saves text into each of the hourly fields. Data entered and Saved (by clicking on the blue storage button) is then saved to the browser's local storage.
 
 Past hours are displayed in gray, present in red, and future hours are green.
 
