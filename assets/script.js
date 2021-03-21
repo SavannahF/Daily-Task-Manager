@@ -29,7 +29,7 @@ $("#currentDay").text(Today);
 var hourAudit = function () {
   var currentHour = moment().hour();
 
-  for (var i = 8; i < 18; i++) {
+  for (var i = 8; i < 19; i++) {
     var taskArea = $("#task-" + i);
     if (currentHour > i) {
       $(taskArea).addClass("past");
